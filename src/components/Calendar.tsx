@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 
@@ -8,6 +8,7 @@ import {
   getMonths,
   getYears,
 } from '../utils/dateUtils';
+import { formatDate } from '../utils/dateFormat';
 
 const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
@@ -17,6 +18,17 @@ const Calendar: React.FC = () => {
   const [selectedDay, setSelectedDay] = useState<number>(1);
   const [openYear, setOpenYear] = useState(false);
   const [openMonth, setOpenMonth] = useState(false);
+
+  // Initialize the selected date to today's Nepali date
+  useEffect(() => {
+    const date = new Date();
+    const today = formatDate(date);
+    
+    const { year, month, day } = convertToBS(today);
+    setSelectedYear(year);
+    setSelectedMonth(month);
+    setSelectedDay(day);
+  }, []);
 
   const handleYearChange = (year: any) => {
     setSelectedYear(year);
@@ -43,13 +55,14 @@ const Calendar: React.FC = () => {
 
   const generateCalendarDays = () => {
     const daysInMonth = [...Array(32).keys()].slice(1);
-    const emptyDays = new Array(new Date(selectedYear, selectedMonth - 1, 1).getDay()).fill(null);
+    const emptyDays = new Array(
+      new Date(selectedYear, selectedMonth - 1, 1).getDay(),
+    ).fill(null);
     return [...emptyDays, ...daysInMonth.slice(0, 30)];
   };
 
   return (
     <View style={styles.container}>
-
       <View style={styles.selectorContainer}>
         <DropDownPicker
           open={openMonth}
@@ -67,7 +80,7 @@ const Calendar: React.FC = () => {
         <DropDownPicker
           open={openYear}
           value={selectedYear}
-          items={getYears().map(year => ({ label: `${year}`, value: year }))}
+          items={getYears().map(year => ({label: `${year}`, value: year}))}
           setOpen={setOpenYear}
           setValue={handleYearChange}
           searchable={true}
@@ -79,16 +92,16 @@ const Calendar: React.FC = () => {
       <View style={styles.calendarContainer}>
         <FlatList
           ListHeaderComponent={
-            <View style={styles.weekRow}>
+            <View style={styles.daysOfWeekContainer}>
               {daysOfWeek.map(day => (
-                <View key={day} style={styles.dayOfWeekContainer}>
-                  <Text style={styles.dayOfWeek}>{day}</Text>
-                </View>
+                <Text key={day} style={styles.dayOfWeek}>
+                  {day}
+                </Text>
               ))}
             </View>
           }
           data={generateCalendarDays()}
-          renderItem={({ item }) => renderDay(item)}
+          renderItem={({item}) => renderDay(item)}
           keyExtractor={(_, index) => index.toString()}
           numColumns={7}
         />
@@ -127,19 +140,16 @@ const styles = StyleSheet.create({
   calendarContainer: {
     marginBottom: 16,
   },
-  weekRow: {
+  daysOfWeekContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 8,
-  },
-  dayOfWeekContainer: {
-    width: '14.28%',
-    alignItems: 'center',
   },
   dayOfWeek: {
     fontSize: 16,
     fontWeight: 'bold',
     textAlign: 'center',
+    width: '14.28%',
   },
   dayContainer: {
     width: '14.28%',
