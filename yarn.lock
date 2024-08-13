@@ -2577,6 +2577,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@sbmdkl/nepali-date-converter@npm:^2.0.3":
+  version: 2.0.3
+  resolution: "@sbmdkl/nepali-date-converter@npm:2.0.3"
+  checksum: c4cd07a7d9c8d81b9683b2f7c03674f10f95fc82dbb9cabd6ccd996fae62c9e0258128d2855d1ccbe90122b9fcb94ecd4c56197323d24bd7477c328d87e27e63
+  languageName: node
+  linkType: hard
+
 "@sideway/address@npm:^4.1.5":
   version: 4.1.5
   resolution: "@sideway/address@npm:4.1.5"
@@ -3988,7 +3995,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dayjs@npm:^1.8.15":
+"dayjs@npm:^1.11.12, dayjs@npm:^1.8.15":
   version: 1.11.12
   resolution: "dayjs@npm:1.11.12"
   checksum: 40a4f67c2df3af125ae0ddec68d3a6d806d3009a7414bf45479aaf82f1dd82f3e139e6642e72391abccc37488897830c56afcabb4c819014130d283644df8128
@@ -7913,6 +7920,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native-dropdown-picker@npm:^5.4.6":
+  version: 5.4.6
+  resolution: "react-native-dropdown-picker@npm:5.4.6"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: d81ee3d68c17107a4d21dbdf9c2fe2ffe4bf4398973d10113139aadc0674221ce5038b945299fba2abc796930ec5e6d5f84291945bf903344493a15b8e2fca43
+  languageName: node
+  linkType: hard
+
 "react-native@npm:0.74.5":
   version: 0.74.5
   resolution: "react-native@npm:0.74.5"
@@ -8018,14 +8035,17 @@ __metadata:
     "@react-native/eslint-config": 0.74.87
     "@react-native/metro-config": 0.74.87
     "@react-native/typescript-config": 0.74.87
+    "@sbmdkl/nepali-date-converter": ^2.0.3
     "@types/react": ^18.2.6
     "@types/react-test-renderer": ^18.0.0
     babel-jest: ^29.6.3
+    dayjs: ^1.11.12
     eslint: ^8.19.0
     jest: ^29.6.3
     prettier: 2.8.8
     react: 18.2.0
     react-native: 0.74.5
+    react-native-dropdown-picker: ^5.4.6
     react-test-renderer: 18.2.0
     typescript: 5.0.4
   languageName: unknown
